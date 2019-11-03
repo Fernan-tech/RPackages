@@ -1,0 +1,189 @@
+---
+title: "Multilevel Logistic Regression"
+author: "Fernando Romero"
+date: "10/28/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Directorio y paquetes
+
+Establecemos el directorio y cargamos los paquetes que vamos a necesitar:
+
+```{r cars}
+# setwd("C:/Users/romero/OneDrive - UNED/Papers/Paper 3/Models_R")
+setwd("~/OneDrive - UNED/Papers/Paper 3/Models_R")
+library("lme4")
+library("readxl")
+library("tidyverse")
+library("lmtest")
+```
+
+A continuación es igual que el archivo que lo que se hace en el archivo: Actualizacion_Datos_Stata.Rmd
+
+Importamos los datos. Es la tabla tal como la dejo Juan en el Excel pero eliminando las columnas repetidas.
+
+Hay dos columnas que se llaman dur_peaje y dos que se llaman dist_Peaje. dist_Peaje es igual para las 26 secciones de Arganda salvo para la 7 y 19. No dependen de la hora de salida, pero por lo que parece si dependen de la hora en la que se ejecuto la API.
+
+Usamos 27 o 28??
+```{r}
+# Datos_Finales_Aux <- read_excel("C:/Users/romero/OneDrive - UNED/Papers/Paper 3/Models_Stata/Datos_Finales_Aux_FR_20191027.xlsx")
+Datos_Finales_Aux <- read_excel("~/OneDrive - UNED/Papers/Paper 3/Models_Stata/Datos_Finales_Aux_FR_20191027.xlsx")
+```
+Vamos a quitar todas las columnas que no he usado en el analisis.
+```{r}
+Datos_Finales_Aux<-Datos_Finales_Aux %>% select(-starts_with("P16"))%>% select(-starts_with("P17"))%>% select(-starts_with("P20"))%>% select(-starts_with("P21"))
+```
+
+
+Actualizamos los registros de la seccion censal teniendo en cuenta que:  
+1. **2812301008** es la suma de seccion censal **2812301008** y **2812301042**.  
+2. **2812301019** es la suma de seccion censal **2812301019** y **2812301043**.  
+3. **2812301022** es la suma de seccion censal **2812301022** y **2812301044**.  
+4. **2812301037** es la suma de seccion censal **2812301037** y **2812301045**.
+
+Por que hay dos secciones censales en el archivo de Stata de Juan?
+```{r}
+Datos_Finales_Aux$seccion_censal<-as.character(Datos_Finales_Aux$seccion_censal)
+Datos_Finales_Aux<-Datos_Finales_Aux %>% mutate(CensusSection = case_when(
+    seccion_censal=="2812301042" ~ "2812301008",
+    seccion_censal=="2812301043" ~ "2812301019",
+    seccion_censal=="2812301044" ~ "2812301022",
+    seccion_censal=="2812301045" ~ "2812301037",
+    TRUE ~ seccion_censal))
+```
+
+Importamos la tabla con el indice de cluster y sus propiedades.
+```{r}
+# Output_Cluster <- read_excel("C:/Users/romero/OneDrive - UNED/Papers/Paper 3/Excels_Resultados/Output_Cluster.xlsx")
+Output_Cluster <- read_excel("~/OneDrive - UNED/Papers/Paper 3/Excels_Resultados/Output_Cluster.xlsx")
+Output_Cluster$CensusSection<-as.character(Output_Cluster$CensusSection)
+```
+
+Unimos las dos tablas: los datos de la encuesta y los datos del cluster.
+Comprobar que se puede hacer el multilevel para solo dos o tres grupos.
+```{r}
+Datos_full<-full_join(Datos_Finales_Aux,Output_Cluster,by="CensusSection")
+```
+
+Ya tenemos la base de datos.
+
+# Preparacion de las variables
+
+ATENCI?N: EN EL BUS LE PREGUNTA A TODO EL MUNDO INDEPENDIENTEMENTE DEL MODO QUE COGI? EN EL VIAJE PREVIO. 
+Si cogio el bus, le preguntan tambi?n.
+En cambio: para el metro solo le preguntan a los que han cogido otro mode diferente al metro.
+sumar P30 y P33 y quitar la gente que ya coge el metro.En el Excel de Juan ya est?n sumados en las variables: elegiria_bus_express y elegiria_metro. NO ENTIENDO ESTO AHORA.
+
+
+Pongo Nombres mas intuitivos y defino las variables que son categóricas.
+
+Hemos revisado hasta la linea 155. 
+
+## 0.Variables independientes espaciales
+0-1 se meten en el logit como no categoricas. Quizas las 4 ultimas no nos interese tenerlas categoricas.
+```{r}
+Datos_full$elegiria_metro<-as.numeric(Datos_full$elegiria_metro)
+Datos_full$elegiria_bus<-as.numeric(Datos_full$elegiria_bus)
+
+Datos_full$current_toll<-factor(Datos_full$current_toll,levels=c("1","2"),labels=c("Si","No"))
+Datos_full$wtp<-factor(Datos_full$wtp,levels = c("1","2","3"),labels=c("Si","No","No_Destino"))
+Datos_full$abono_mensual<-factor(Datos_full$abono_mensual,levels = c("1","2"),labels=c("Si","No"))
+Datos_full$carpooling<-factor(Datos_full$carpooling,levels=c("1","2"),labels=c("Si","No"))
+```
+
+Variables independientes ordenadas por categorias.  
+## 1.Variables independientes espaciales
+```{r}
+Datos_full$seccion_censal<-factor(Datos_full$seccion_censal)
+Datos_full$cluster_A_1<-factor(Datos_full$cluster_A_1)
+Datos_full$cluster_A_2<-factor(Datos_full$cluster_A_2)
+Datos_full$cluster_A_4<-factor(Datos_full$cluster_A_4)
+Datos_full$cluster_A_5<-factor(Datos_full$cluster_A_5)
+Datos_full$cluster_A_7<-factor(Datos_full$cluster_A_7)
+Datos_full$cluster_A_8<-factor(Datos_full$cluster_A_8)
+Datos_full$cluster_A_10<-factor(Datos_full$cluster_A_10)
+Datos_full$cluster_A_11<-factor(Datos_full$cluster_A_11)
+Datos_full$cluster_RA_1<-factor(Datos_full$cluster_RA_1)
+Datos_full$cluster_RA_2<-factor(Datos_full$cluster_RA_2)
+Datos_full$cluster_RA_3<-factor(Datos_full$cluster_RA_3)
+Datos_full$cluster_RA_4<-factor(Datos_full$cluster_RA_4)
+Datos_full$cluster_RA_5<-factor(Datos_full$cluster_RA_5)
+Datos_full$cluster_RA_6<-factor(Datos_full$cluster_RA_6)
+Datos_full$cluster_RA_7<-factor(Datos_full$cluster_RA_7)
+Datos_full$cluster_RA_8<-factor(Datos_full$cluster_RA_8)
+Datos_full$cluster_RA_9<-factor(Datos_full$cluster_RA_9)
+Datos_full$cluster_RA_10<-factor(Datos_full$cluster_RA_10)
+Datos_full$cluster_RA_11<-factor(Datos_full$cluster_RA_11)
+Datos_full$cluster_RA_12<-factor(Datos_full$cluster_RA_12)
+
+Datos_full$zona_metro<-factor(Datos_full$zona_metro)
+Datos_full$Parada_bus<-factor(Datos_full$Parada_bus)
+Datos_full$municipio <- factor(Datos_full$municipio, levels=c(28014,28123),labels = c("Arganda","Rivas"))
+
+```
+
+## 2.Variables independientes socioeconomicas
+Edad es continua y no se toca.
+
+```{r}
+Datos_full$edad_cat<-factor(Datos_full$edad_cat,levels = c(1:6),labels=c("15 o menos","De 16 a 26","De 27 a 34","De 35 a 49","De 50 a 64","Mayor de 64"))
+Datos_full$genero<-factor(Datos_full$genero,levels = c(1,2),labels=c("Hombre","Mujer"))
+Datos_full$ingreso<-factor(Datos_full$ingreso,levels = c(1,2,3,4,5,99),labels=c("Menos_900","900_1600","1600_2500","2500_3000","Mas_3000","NS_NC"))
+Datos_full$estudios<-factor(Datos_full$estudios,levels = c(1:4),labels=c("Sin_estudios","Estudios_primarios","Estudios_Secundarios","Estudios_Universitarios"))
+Datos_full$sit_laboral<- factor(Datos_full$sit_laboral,levels=c(1:9),labels=c("Employed","Student","Employed_Student","Unpaid_household","Retire","Pensiones","Unemployed_Looking","Unemployed_Not_Looking","Other"))
+Datos_full$vehiculo <- factor(Datos_full$vehiculo,levels=c(1:5),labels=c("No","Yes_Driver","Yes_ST_Driver","Yes_No_Driver","Yes_Passenger"))
+Datos_full$carnet <- factor(Datos_full$carnet, levels=c(1:5),labels=c("NO","DeMoto","DeCoche","DeMotoYCoche","NoProcede"))
+Datos_full$abono <-factor(Datos_full$abono,levels = c(2,1),labels=c("No","Yes"))
+
+```
+
+## 3.Variables independientes relacionadas con el viaje
+```{r}
+Datos_full$frec_madrid<- factor(Datos_full$frec_madrid,levels=c(1:3),labels=c("More_3days","1-3days","1_2month"))
+Datos_full$frec_viaje<- factor(Datos_full$frec_viaje,levels=c(1:4),labels=c("4 o mas dias a la semana","1-3 dias a la semana","1-2 veces al mes","Menos de una vez al mes"))
+
+Datos_full$modo <- factor(Datos_full$modo, levels= c(1:7),labels=c("Coche","Motocicleta","Bus","Metro","Taxi","VTC","Bus_Discrecional"))
+Datos_full$modo_bis <- factor(Datos_full$modo_bis, levels= c(1:8),labels=c("Coche","Motocicleta","Bus","Metro","Taxi","VTC","Bus_Discrecional","R3"))
+Datos_full$tipo_dia <- factor(Datos_full$tipo_dia, levels=c(1:7),labels = c("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"))
+Datos_full$tipo_dia2 <- factor(Datos_full$tipo_dia2, levels=c("1","1","1","1","1","2","3"),labels = c("Weekday","Weekday","Weekday","Weekday","Weekday","Saturday","Sunday"))
+Datos_full$motivo_viaje <- factor(Datos_full$motivo_viaje, levels=c(1:8),labels = c("Work_Studies","Working_Affairs","Personal_Affairs","Leisure","Shopping","Doctor","Visiting_Friends","Other"))
+Datos_full$motivo_viaje_2<-factor(Datos_full$motivo_viaje_2, levels=c("1","2"),labels=c("Work_Studies","Non_Work_Studies"))
+
+Datos_full$ruta<-factor(Datos_full$ruta,levels=c(1:2),labels=c("A3","R3"))
+
+Datos_full$P15_B<-factor(Datos_full$P15_B,levels=c(1:2),labels=c("Conductor","Acompanante"))
+Datos_full$hora_franja <- factor(Datos_full$hora_franja, levels=c("1","2","3","4","5","6"),labels = c("peak morning","non peak morning","afternoon","peak evening","non peak evening","night"))
+
+Datos_full$solo <- factor(Datos_full$solo, levels = c(1:3),labels=c("Solo","Acompanado","Acompanado_Menores"))
+Datos_full$combinar<- factor(Datos_full$combinar, levels = c(1:2),labels=c("Si","No"))
+Datos_full$aspectos<- factor(Datos_full$aspectos, levels = c(1:4),labels=c("Tiempo de viaje por congestion (nivel de trafico)","Incidencias en el medio elegido: obras, accidentes, huelgas en transporte publico","Meteorologia","Protocolos de contaminacion en Madrid capital"))
+
+```
+Estratificamos la variable conocimiento. Hay que tener cuidado que de esta manera le hemos puesto 0 tambien a Rivas. Ademas del intervalo -0.5 a 0.5.
+
+```{r}
+Datos_full<-Datos_full %>% mutate(conocimiento=case_when(
+  current_toll_diff< -0.5 ~ 1,
+  current_toll_diff> 0.5 ~ 2,
+  current_toll == "No" ~ 3,
+  TRUE ~ 0
+))
+Datos_full$conocimiento<-factor(Datos_full$conocimiento)
+```
+
+Creamos las variables ahorrotiempo1 y tiempo2
+```{r}
+Datos_full<-Datos_full %>% mutate(ahorrotiempo1=tiempo_viaje - Duracion_Coche_R3)
+Datos_full<-Datos_full %>% mutate(tiempo2 = tiempo_viaje * tiempo_viaje)
+
+openxlsx::write.xlsx(Datos_full,"Datos_full.xlsx")
+
+dataSurveyA3<-Datos_full[,c("REGISTRO","municipio","seccion_censal","genero","edad","edad_cat","frec_madrid","sit_laboral","ingreso","estudios","carnet","vehiculo","abono","tipo_dia","P12","tiempo_viaje","motivo_viaje","modo","ruta","P15_B","combinar","solo","frec_viaje","aspectos","current_toll","current_toll_tarifa","wtp","wtp_tarifa","abono_mensual","abono_mensual_tarifa","carpooling","carpooling_descuento","elegiria_bus_arganda","elegiria_bus_rivas","elegiria_metro_arganda","elegiria_metro_rivas")]
+
+usethis::use_data(dataSurveyA3, overwrite = T)
+```
+
