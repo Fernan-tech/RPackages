@@ -18,6 +18,26 @@ library('surveyA3Madrid')
 base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
 cleanEx()
+nameEx("contingencyTables")
+### * contingencyTables
+
+flush(stderr()); flush(stdout())
+
+base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+### Name: contingencyTables
+### Title: Contingency Tables
+### Aliases: contingencyTables
+
+### ** Examples
+
+contingencyTables("genero","municipio")
+contingencyTables("genero","municipio",dataSurveyA3)
+
+
+
+base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+base::cat("contingencyTables", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+cleanEx()
 nameEx("dataSurveyA3")
 ### * dataSurveyA3
 

@@ -1,7 +1,7 @@
-#' surveyA3Madrid: A package with a minimum example of package creation.
+#' surveyA3Madrid: A package with travel survey data from A3 Eastern Corridor, Madrid, Spain.
 #'
-#' This package is an exercise in package creation using
-#' R studio. The package includes a sample function and
+#' This package contains information about a travel survey data carried out in September-October 2018
+#' in two municipalities of the A3 Eastern Corridor Madrid: Rivas and Arganda. The package includes a sample function and
 #' a sample dataset with their respective documentation.
 #'
 #' @docType package
@@ -61,5 +61,5 @@ NULL
 #' @usage data(dataSurveyA3)
 #' @examples
 #'  data(dataSurveyA3)
-#'  GDPPC <- dataSurveyA3$genero
+#'  genero <- dataSurveyA3$genero
 "dataSurveyA3"

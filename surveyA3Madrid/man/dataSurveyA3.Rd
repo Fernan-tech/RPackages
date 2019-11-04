@@ -52,6 +52,6 @@ in two municipalities of the A3 Eastern Corridor Madrid: Rivas and Arganda.
 }
 \examples{
  data(dataSurveyA3)
- GDPPC <- dataSurveyA3$genero
+ genero <- dataSurveyA3$genero
 }
 \keyword{datasets}

@@ -6,7 +6,7 @@ Version: 0.1.0
 Author: Fernando Romero
 Maintainer: Fernando Romero <fernando.romero@upm.es>
 Description: The travel survey was carried out in September-October 2018 in the municipalities of Arganda and Rivas.
-    Socioeconomic questions, trip-related questions and stated preference questions. 
+    There are three kinds of questions: socioeconomic questions, trip-related questions and stated preference questions. 
 License: CC0
 Encoding: UTF-8
 LazyData: true
@@ -14,5 +14,5 @@ RoxygenNote: 6.1.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2019-11-03 22:46:02 UTC; fernandoromerogarcia
-Built: R 3.6.0; ; 2019-11-03 22:46:06 UTC; unix
+Packaged: 2019-11-04 01:06:15 UTC; fernandoromerogarcia
+Built: R 3.6.0; ; 2019-11-04 01:06:20 UTC; unix
