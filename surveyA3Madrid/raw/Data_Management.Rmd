@@ -193,7 +193,7 @@ Estratificamos la variable conocimiento. Hay que tener cuidado que de esta maner
 
 ```{r}
 Datos_full<-Datos_full %>% mutate(conocimiento=case_when(
-  current_toll_diff> -0.5 & current_toll_diff< 0.5 ~ 0,
+  current_toll_diff>= -0.5 & current_toll_diff<= 0.5 ~ 0,
   current_toll_diff< -0.5 ~ 1,
   current_toll_diff> 0.5 ~ 2,
   current_toll == "No" ~ 3,
