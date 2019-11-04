@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning=FALSE, message=FALSE)
 ```
 
 ## Directorio y paquetes
@@ -57,7 +57,7 @@ Datos_Finales_Aux<-Datos_Finales_Aux %>% mutate(CensusSection = case_when(
 ```
 
 Importamos la tabla con el indice de cluster y sus propiedades.
-Del dataset Output_Cluster hay que revisar muchas de las columnas de las porpiedades por que son iguales
+Del dataset Output_Cluster hay que revisar muchas de las columnas de las propiedades porque son iguales
 ```{r}
 # Output_Cluster <- read_excel("C:/Users/romero/OneDrive - UNED/Papers/Paper 3/Excels_Resultados/Output_Cluster.xlsx")
 Output_Cluster <- read_excel("~/OneDrive - UNED/Papers/Paper 3/Excels_Resultados/Output_Cluster.xlsx")
@@ -71,7 +71,6 @@ colnames(Output_Cluster)[which(names(Output_Cluster)=="Input_Cl_2_RA_4")]<-"ArgR
 colnames(Output_Cluster)[which(names(Output_Cluster)=="Input_Cl_1_RA_4")]<-"ArgRiv_Cluster_Women"
 colnames(Output_Cluster)[which(names(Output_Cluster)=="Input_Cl_4_RA_7")]<-"ArgRiv_Cluster_Right_Wing"
 Output_Cluster<-Output_Cluster %>% select(-starts_with("Input_"))
-
 ```
 
 Unimos las dos tablas: los datos de la encuesta y los datos del cluster.
@@ -85,10 +84,9 @@ Ya tenemos la base de datos.
 # Preparacion de las variables
 
 ATENCI?N: EN EL BUS LE PREGUNTA A TODO EL MUNDO INDEPENDIENTEMENTE DEL MODO QUE COGI? EN EL VIAJE PREVIO. 
-Si cogio el bus, le preguntan tambi?n.
+Si cogio el bus, le preguntan tambi?n. PORQUE ES UN MODO DE TRANSPORTE DIFERENTE.
 En cambio: para el metro solo le preguntan a los que han cogido otro mode diferente al metro.
-sumar P30 y P33 y quitar la gente que ya coge el metro.En el Excel de Juan ya est?n sumados en las variables: elegiria_bus_express y elegiria_metro. NO ENTIENDO ESTO AHORA.
-
+sumar P30 y P33 y quitar la gente que ya coge el metro.En el Excel de Juan ya est?n sumados en las variables: elegiria_bus_express y elegiria_metro.
 
 Pongo Nombres mas intuitivos y defino las variables que son categóricas.
 
@@ -106,7 +104,22 @@ Datos_full$abono_mensual<-factor(Datos_full$abono_mensual,levels = c("1","2"),la
 Datos_full$carpooling<-factor(Datos_full$carpooling,levels=c("1","2"),labels=c("Si","No"))
 ```
 
-Variables independientes ordenadas por categorias.  
+¿Cómo preguntamos por el descuento?  
+1. Gente que contesta que no usaria el carpooling en la R3 sin considerar el descuento
+2. 3 euros significa que la quieren gratis  
+3. 0 euros significan que lo harian incluso sin descuento
+
+Por lo que hay que cambiar el orden para que el grupo de sin contestar y el grupo más reacio sean numéricamente consecutivos.
+
+Si cambio la variable estrictamente con 3, los grupos 1 y 2 se mezclarian. Por tanto,uso 3.2
+```{r}
+Datos_full <- Datos_full %>% mutate(descuento_carpool=case_when(
+  carpooling=="No" ~ 0,
+  TRUE ~ 3.2-carpooling_descuento))
+```
+
+De esta manera, en la variable creada a la gente que no se le pregunta aparece como NA.
+# Variables independientes ordenadas por categorias  
 ## 1.Variables independientes espaciales
 ```{r}
 Datos_full$seccion_censal<-factor(Datos_full$seccion_censal)
@@ -131,9 +144,11 @@ Datos_full$cluster_RA_10<-factor(Datos_full$cluster_RA_10)
 Datos_full$cluster_RA_11<-factor(Datos_full$cluster_RA_11)
 Datos_full$cluster_RA_12<-factor(Datos_full$cluster_RA_12)
 
+Datos_full$municipio <- factor(Datos_full$municipio, levels=c(28014,28123),labels = c("Arganda","Rivas"))
 Datos_full$zona_metro<-factor(Datos_full$zona_metro)
 Datos_full$Parada_bus<-factor(Datos_full$Parada_bus)
-Datos_full$municipio <- factor(Datos_full$municipio, levels=c(28014,28123),labels = c("Arganda","Rivas"))
+Datos_full$Distrito_Destino_Name<-factor(Datos_full$Distrito_Destino_Name)
+Datos_full$Barrio_Destino_Name<-factor(Datos_full$Barrio_Destino_Name)
 
 ```
 
@@ -174,14 +189,14 @@ Datos_full$combinar<- factor(Datos_full$combinar, levels = c(1:2),labels=c("Si",
 Datos_full$aspectos<- factor(Datos_full$aspectos, levels = c(1:4),labels=c("Tiempo de viaje por congestion (nivel de trafico)","Incidencias en el medio elegido: obras, accidentes, huelgas en transporte publico","Meteorologia","Protocolos de contaminacion en Madrid capital"))
 
 ```
-Estratificamos la variable conocimiento. Hay que tener cuidado que de esta manera le hemos puesto 0 tambien a Rivas. Ademas del intervalo -0.5 a 0.5.
+Estratificamos la variable conocimiento. Hay que tener cuidado que de esta manera le hemos puesto 0 tambien a Rivas. Ademas del intervalo -0.5 a 0.5. YA ESTÁ SOLUCIONADO.
 
 ```{r}
 Datos_full<-Datos_full %>% mutate(conocimiento=case_when(
+  current_toll_diff> -0.5 & current_toll_diff< 0.5 ~ 0,
   current_toll_diff< -0.5 ~ 1,
   current_toll_diff> 0.5 ~ 2,
   current_toll == "No" ~ 3,
-  TRUE ~ 0
 ))
 Datos_full$conocimiento<-factor(Datos_full$conocimiento)
 ```
@@ -193,7 +208,7 @@ Datos_full<-Datos_full %>% mutate(tiempo2 = tiempo_viaje * tiempo_viaje)
 
 openxlsx::write.xlsx(Datos_full,"Datos_full.xlsx")
 
-dataSurveyA3<-Datos_full[,c("REGISTRO","municipio","seccion_censal","genero","edad","edad_cat","frec_madrid","sit_laboral","ingreso","estudios","carnet","vehiculo","abono","tipo_dia","tipo_dia2","P12","hora_franja","tiempo_viaje","motivo_viaje","motivo_viaje_2","modo","modo_bis","ruta","P15_B","combinar","solo","frec_viaje","aspectos","current_toll","current_toll_tarifa","current_toll_diff","conocimiento","wtp","wtp_tarifa","abono_mensual","abono_mensual_tarifa","carpooling","carpooling_descuento","elegiria_bus_arganda","elegiria_bus_rivas","elegiria_bus","elegiria_metro_arganda","elegiria_metro_rivas","elegiria_metro","cluster_A_1","cluster_A_2","cluster_A_4","cluster_A_5","cluster_A_7","cluster_A_8","cluster_A_10","cluster_A_11","Arg_Cluster_Income","Arg_Cluster_Age","Arg_Cluster_Women","Arg_Cluster_Right_Wing","cluster_RA_1","cluster_RA_2","cluster_RA_3","cluster_RA_4","cluster_RA_5","cluster_RA_6","cluster_RA_7","cluster_RA_8","cluster_RA_9","cluster_RA_10","cluster_RA_11","cluster_RA_12","ArgRiv_Cluster_Income","ArgRiv_Cluster_Age","ArgRiv_Cluster_Women","ArgRiv_Cluster_Right_Wing")]
+dataSurveyA3<-Datos_full[,c("REGISTRO","municipio","seccion_censal","frec_madrid","genero","edad","edad_cat","sit_laboral","ingreso","estudios","carnet","vehiculo","abono","tipo_dia","tipo_dia2","P12","hora_franja","tiempo_viaje","motivo_viaje","motivo_viaje_2","modo","modo_bis","ruta","P15_B","combinar","solo","frec_viaje","aspectos","current_toll","current_toll_tarifa","current_toll_diff","conocimiento","wtp","wtp_tarifa","wtp_tarifa_2","abono_mensual","abono_mensual_tarifa","vineta_mensual_tarifa_2","carpooling","carpooling_descuento","carpooling_descuento_2","descuento_carpool","elegiria_bus_arganda","elegiria_bus_rivas","elegiria_bus","elegiria_metro_arganda","elegiria_metro_rivas","elegiria_metro","zona_metro","Parada_bus","Distrito_Destino_Name","Barrio_Destino_Name","cluster_A_1","cluster_A_2","cluster_A_4","cluster_A_5","cluster_A_7","cluster_A_8","cluster_A_10","cluster_A_11","Arg_Cluster_Income","Arg_Cluster_Age","Arg_Cluster_Women","Arg_Cluster_Right_Wing","cluster_RA_1","cluster_RA_2","cluster_RA_3","cluster_RA_4","cluster_RA_5","cluster_RA_6","cluster_RA_7","cluster_RA_8","cluster_RA_9","cluster_RA_10","cluster_RA_11","cluster_RA_12","ArgRiv_Cluster_Income","ArgRiv_Cluster_Age","ArgRiv_Cluster_Women","ArgRiv_Cluster_Right_Wing")]
 
 usethis::use_data(dataSurveyA3, overwrite = T)
 ```
