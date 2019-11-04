@@ -63,32 +63,32 @@ NULL
 #'   \item{elegiria_metro}{Willingness to use Metro if the transfer in Puerta Arganda station was removed for a journey similar to the stated one. Created combining elegiria_metro_arganda and elegiria_metro_rivas}
 #'   \item{cluster_A_1}{Cluster of the 26 census section of Arganda considering average household income. 2 categories}
 #'   \item{cluster_A_2}{Cluster of the 26 census section of Arganda considering average household income. 3 categories}
-#'   \item{cluster_A_4}{Cluster of the 26 census section of Arganda considering average age, % women, and average household income. 2 categories}
-#'   \item{cluster_A_5}{Cluster of the 26 census section of Arganda considering average age, % women, and average household income. 3 categories}
-#'   \item{cluster_A_7}{Cluster of the 26 census section of Arganda considering average age, % women, average household income, % votes to right-wing parties. 2 categories}
-#'   \item{cluster_A_8}{Cluster of the 26 census section of Arganda considering average age, % women, average household income, % votes to right-wing parties. 3 categories}
-#'   \item{cluster_A_10}{Cluster of the 26 census section of Arganda considering average age, average household income, % votes to right-wing parties. 2 categories}
-#'   \item{cluster_A_11}{Cluster of the 26 census section of Arganda considering average age, average household income, % votes to right-wing parties. 3 categories}
+#'   \item{cluster_A_4}{Cluster of the 26 census section of Arganda considering average age, percentage of women, and average household income. 2 categories}
+#'   \item{cluster_A_5}{Cluster of the 26 census section of Arganda considering average age, percentage of women, and average household income. 3 categories}
+#'   \item{cluster_A_7}{Cluster of the 26 census section of Arganda considering average age, percentage of women, average household income, percentage of votes to right-wing parties. 2 categories}
+#'   \item{cluster_A_8}{Cluster of the 26 census section of Arganda considering average age, percentage of women, average household income, percentage of votes to right-wing parties. 3 categories}
+#'   \item{cluster_A_10}{Cluster of the 26 census section of Arganda considering average age, average household income, percentage of votes to right-wing parties. 2 categories}
+#'   \item{cluster_A_11}{Cluster of the 26 census section of Arganda considering average age, average household income, percentage of votes to right-wing parties. 3 categories}
 #'   \item{Arg_Cluster_Income}{Average household income of each of the 26 census section of Arganda}
 #'   \item{Arg_Cluster_Women}{Average age of each of the 26 census section of Arganda}
-#'   \item{Arg_Cluster_Age}{% women of each of the 26 census section of Arganda}
-#'   \item{Arg_Cluster_Right_Wing}{% votes to right-wing parties of each of the 26 census section of Arganda}
+#'   \item{Arg_Cluster_Age}{Percentage of women of each of the 26 census section of Arganda}
+#'   \item{Arg_Cluster_Right_Wing}{Percentage of votes to right-wing parties of each of the 26 census section of Arganda}
 #'   \item{cluster_RA_1}{Cluster of all census sections considering average household income. 2 categories}
 #'   \item{cluster_RA_2}{Cluster of all census sections considering average household income. 3 categories}
 #'   \item{cluster_RA_3}{Cluster of all census sections considering average household income. 4 categories}
-#'   \item{cluster_RA_4}{Cluster of all census sections considering average age, % women, and average household income. 2 categories}
-#'   \item{cluster_RA_5}{Cluster of all census sections considering average age, % women, and average household income. 3 categories}
-#'   \item{cluster_RA_6}{Cluster of all census sections considering average age, % women, and average household income. 4 categories}
-#'   \item{cluster_RA_7}{Cluster of all census sections considering average age, % women, average household income, % votes to right-wing parties. 2 categories}
-#'   \item{cluster_RA_8}{Cluster of all census sections considering average age, % women, average household income, % votes to right-wing parties. 3 categories}
-#'   \item{cluster_RA_9}{Cluster of all census sections considering average age, % women, average household income, % votes to right-wing parties. 4 categories}
-#'   \item{cluster_RA_10}{Cluster of all census sections considering average age, average household income, % votes to right-wing parties. 2 categories}
-#'   \item{cluster_RA_11}{Cluster of all census sections considering average age, average household income, % votes to right-wing parties. 3 categories}
-#'   \item{cluster_RA_12}{Cluster of all census sections considering average age, average household income, % votes to right-wing parties. 4 categories}
+#'   \item{cluster_RA_4}{Cluster of all census sections considering average age, percentage of women, and average household income. 2 categories}
+#'   \item{cluster_RA_5}{Cluster of all census sections considering average age, percentage of women, and average household income. 3 categories}
+#'   \item{cluster_RA_6}{Cluster of all census sections considering average age, percentage of women, and average household income. 4 categories}
+#'   \item{cluster_RA_7}{Cluster of all census sections considering average age, percentage of women, average household income, percentage of votes to right-wing parties. 2 categories}
+#'   \item{cluster_RA_8}{Cluster of all census sections considering average age, percentage of women, average household income, percentage of votes to right-wing parties. 3 categories}
+#'   \item{cluster_RA_9}{Cluster of all census sections considering average age, percentage of women, average household income, percentage of votes to right-wing parties. 4 categories}
+#'   \item{cluster_RA_10}{Cluster of all census sections considering average age, average household income, percentage of votes to right-wing parties. 2 categories}
+#'   \item{cluster_RA_11}{Cluster of all census sections considering average age, average household income, percentage of votes to right-wing parties. 3 categories}
+#'   \item{cluster_RA_12}{Cluster of all census sections considering average age, average household income, percentage of votes to right-wing parties. 4 categories}
 #'   \item{Arg_Cluster_Income}{Average household income of all census sections}
 #'   \item{Arg_Cluster_Women}{Average age of each of allcensus sections}
-#'   \item{Arg_Cluster_Age}{% women of each of all census sections}
-#'   \item{Arg_Cluster_Right_Wing}{% votes to right-wing parties of each of all census sections}
+#'   \item{Arg_Cluster_Age}{Percentage of women of each of all census sections}
+#'   \item{Arg_Cluster_Right_Wing}{Percentage of votes to right-wing parties of each of all census sections}
 #' }
 #'
 #' @docType data
