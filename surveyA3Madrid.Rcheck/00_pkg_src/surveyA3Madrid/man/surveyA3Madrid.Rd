@@ -7,8 +7,8 @@
 \title{surveyA3Madrid: A package with travel survey data from A3 Eastern Corridor, Madrid, Spain.}
 \description{
 This package contains information about a travel survey data carried out in September-October 2018
-in two municipalities of the A3 Eastern Corridor Madrid: Rivas and Arganda. The package includes a sample function and
-a sample dataset with their respective documentation.
+in two municipalities of the A3 Eastern Corridor Madrid: Rivas and Arganda. The package includes a sample function to create
+contingency tables in a simple way.
 }
 \references{
 \url{https://github.com/Fernan-tech}

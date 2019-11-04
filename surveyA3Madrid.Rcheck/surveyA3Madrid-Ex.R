@@ -52,7 +52,7 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 ### ** Examples
 
  data(dataSurveyA3)
- GDPPC <- dataSurveyA3$genero
+ genero <- dataSurveyA3$genero
 
 
 
