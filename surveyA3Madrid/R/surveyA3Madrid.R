@@ -65,10 +65,12 @@ NULL
 #'   \item{elegiria_metro_arganda}{Only Arganda dwellers. It is not asked to people who made their last trip by metro. Willingness to use Metro if the transfer in Puerta Arganda station was removed for a journey similar to the stated one}
 #'   \item{elegiria_metro_rivas}{Only Rivas dwellers. It is not asked to people who made their last trip by metro. Willingness to use Metro if the transfer in Puerta Arganda station was removed for a journey similar to the stated one}
 #'   \item{elegiria_metro}{It is not asked to people who made their last trip by metro. Willingness to use Metro if the transfer in Puerta Arganda station was removed for a journey similar to the stated one. Created combining elegiria_metro_arganda and elegiria_metro_rivas}
-#'   \item{zona_metro}{For each census section, nearest metro stations. Calculated by the centroid of the census section and API Google Maps. 5 categories}
+#'   \item{zona_metro}{For each census section, nearest metro stations. Calculated with the centroid of the census section and API Google Maps. 5 categories}
+#'   \item{Distance_min_metro}{For each census section, distance to the nearest metro station in meters. Calculated with the centroid of the census section and API Google Maps. 5 categories}
 #'   \item{Parada_bus}{For each census section, nearest suggested Express Bus Stop. Calculated by the centroid of the census section and API Google Maps. 6 categories}
 #'   \item{Distrito_Destino_Name}{The official name of the destination district. Created from  the last trip destination stated by the respondent in ArcGIS}
 #'   \item{Barrio_Destino_Name}{The official name of the destination neighbourhood. Created from  the last trip destination stated by the respondent in ArcGIS}
+#'   \item{ahorrotiempo1}{Travel time saving using R3 toll highway compared to the stated travel time. Created using API Google Maps}
 #'   \item{cluster_A_1}{Cluster of the 26 census section of Arganda considering average household income. 2 categories}
 #'   \item{cluster_A_2}{Cluster of the 26 census section of Arganda considering average household income. 3 categories}
 #'   \item{cluster_A_4}{Cluster of the 26 census section of Arganda considering average age, percentage of women, and average household income. 2 categories}
