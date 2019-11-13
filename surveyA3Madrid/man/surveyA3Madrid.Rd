@@ -14,5 +14,5 @@ contingency tables in a simple way.
 \url{https://github.com/Fernan-tech}
 }
 \author{
-Fernando Romero, TRANSyT Transport Research Centre, Universidad Politecnica de Madrid \email{fernando.romero@mcmaster.ca}
+Fernando Romero, TRANSyT Transport Research Centre, Universidad Politecnica de Madrid \email{fernando.romero@upm.es}
 }

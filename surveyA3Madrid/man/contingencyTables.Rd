@@ -4,14 +4,14 @@
 \alias{contingencyTables}
 \title{Contingency Tables}
 \usage{
-contingencyTables(x, y, dataset = dataSurveyA3)
+contingencyTables(x, y, data)
 }
 \arguments{
 \item{x}{A variable name given as a character string}
 
 \item{y}{A variable name given as a character string}
 
-\item{dataset}{The name of the dataframe. By default, dataSurveyA3}
+\item{data}{The name of the dataframe.}
 }
 \value{
 The contingency table of variables x and y
@@ -21,6 +21,7 @@ This function creates a cotingency table based on
 two variables of a dataframe.
 }
 \examples{
-contingencyTables("genero","municipio")
-contingencyTables("genero","municipio",dataSurveyA3)
+data(dataSurveyA3)
+contingencyTables("genero","municipio", dataSurveyA3)
+contingencyTables("genero","municipio", dataSurveyA3)
 }

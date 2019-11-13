@@ -21,8 +21,7 @@ knitr::opts_chunk$set(
   comment = "",
   echo = FALSE, 
   warning = FALSE, 
-  message = FALSE, 
-  cache = TRUE
+  message = FALSE
 )
 ```
 
@@ -32,7 +31,7 @@ knitr::opts_chunk$set(
 # De esta manera separo el código de los datos y el codigo del modelo y sólo trabajo con un único archivo de tratamiento de datos.
 library(surveyA3Madrid)
 library(tidyverse)
-data("dataSurveyA3")
+data(dataSurveyA3)
 ```
 
 **Willingness to share vehicle depending on the municipality**   

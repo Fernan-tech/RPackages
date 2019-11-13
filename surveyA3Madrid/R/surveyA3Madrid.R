@@ -6,7 +6,7 @@
 #'
 #' @docType package
 #' @name surveyA3Madrid
-#' @author Fernando Romero, TRANSyT Transport Research Centre, Universidad Politecnica de Madrid \email{fernando.romero@@mcmaster.ca}
+#' @author Fernando Romero, TRANSyT Transport Research Centre, Universidad Politecnica de Madrid \email{fernando.romero@@upm.es}
 #' @references \url{https://github.com/Fernan-tech}
 NULL
 

@@ -1,0 +1,34 @@
+---
+title: "carpooling"
+author: "Fernando Romero"
+abstract: This vignette describes different econometric models for drawing conclusions
+  about the travel survey data named dataSurveyA3 found in this package surveyA3Madrid.
+  In particular, the willingness of drivers to share their vehicle with random strangers
+  is studied. To that end, Tobit Multilevel Models and Heckman sample selection models are conducted.
+keywords: carpooling; Madrid; willingness to share; sample selection models; Heckman; Tobit  
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{carpooling}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(surveyA3Madrid)
+```
+
+```{r}
+data("dataSurveyA3")
+```
+
+```{r}
+head(dataSurveyA3)
+```
+
