@@ -1,0 +1,56 @@
+---
+title: "Models carpool"
+author: "Fernando Romero"
+keywords: carpooling; Madrid; willingness to share; sample selection models; Heckman;
+  Tobit
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  html_notebook: default
+abstract: This vignette describes different econometric models for drawing conclusions
+  about the travel survey data named dataSurveyA3 found in this package surveyA3Madrid.
+  In particular, the willingness of drivers to share a vehicle with random strangers
+  is studied.
+vignette: |
+  %\VignetteIndexEntry{Models carpool} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+---
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "",
+  echo = FALSE, 
+  warning = FALSE, 
+  message = FALSE, 
+  cache = TRUE
+)
+```
+
+# 1. Download dataframe and required libraries
+
+```{r setup, include=FALSE}
+# De esta manera separo el código de los datos y el codigo del modelo y sólo trabajo con un único archivo de tratamiento de datos.
+library(surveyA3Madrid)
+library(tidyverse)
+data("dataSurveyA3")
+```
+
+# 2. Carpooling Models
+We know how to developed a *Tobit Multilevel Model* in Stata.
+Are we able to developed a *Tobit Multilevel Model* in R?
+
+carpooling_descuento_2 esta creada para el Tobit PERO no esta ordenado.
+Sí esta ordenada la variable descuento_carpool
+
+
+**Willingness to share depending on the municipality**   
+Rivas dwellers are not surveyed because they do not have direct access to R3 Toll Expressway.
+```{r}
+table(dataSurveyA3$municipio,dataSurveyA3$carpooling,useNA = c("ifany"))
+```
+
+Wrong data due to unrecognised trip destination or trip destination outside the boundaries of Madrid municipality are removed. Responses from Rivas are removed
+```{r}
+dataSurveyA3_carpooling <- dataSurveyA3 %>% filter(municipio=="Arganda"&!is.na(Barrio_Destino_Name))
+```
+There are `r nrow(dataSurveyA3_carpooling)` observations.

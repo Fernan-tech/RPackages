@@ -16,10 +16,8 @@ Establecemos el directorio y cargamos los paquetes que vamos a necesitar:
 ```{r cars}
 # setwd("C:/Users/romero/OneDrive - UNED/Papers/Paper 3/Models_R")
 setwd("~/OneDrive - UNED/Papers/Paper 3/Models_R")
-library("lme4")
 library("readxl")
 library("tidyverse")
-library("lmtest")
 ```
 
 A continuación es igual que el archivo que lo que se hace en el archivo: Actualizacion_Datos_Stata.Rmd
@@ -28,7 +26,7 @@ Importamos los datos. Es la tabla tal como la dejo Juan en el Excel pero elimina
 
 Hay dos columnas que se llaman dur_peaje y dos que se llaman dist_Peaje. dist_Peaje es igual para las 26 secciones de Arganda salvo para la 7 y 19. No dependen de la hora de salida, pero por lo que parece si dependen de la hora en la que se ejecuto la API.
 
-Usamos 27 o 28??
+Usamos 27 o 28?? En Stata usamos el 28 y aquí usamos el 27. Por qué?
 ```{r}
 # Datos_Finales_Aux <- read_excel("C:/Users/romero/OneDrive - UNED/Papers/Paper 3/Models_Stata/Datos_Finales_Aux_FR_20191027.xlsx")
 Datos_Finales_Aux <- read_excel("~/OneDrive - UNED/Papers/Paper 3/Models_Stata/Datos_Finales_Aux_FR_20191027.xlsx")
