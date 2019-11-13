@@ -9,3 +9,6 @@ purrr
 dplyr
 stringr
 forcats
+miscTools
+maxLik
+sampleSelection

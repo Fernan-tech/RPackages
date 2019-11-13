@@ -1,17 +1,17 @@
 ---
 title: "Models carpool"
 author: "Fernando Romero"
-keywords: carpooling; Madrid; willingness to share; sample selection models; Heckman;
-  Tobit
 output:
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
   html_notebook: default
 abstract: This vignette describes different econometric models for drawing conclusions
   about the travel survey data named dataSurveyA3 found in this package surveyA3Madrid.
-  In particular, the willingness of drivers to share a vehicle with random strangers
-  is studied.
+  In particular, the willingness of drivers to share their vehicle with random strangers
+  is studied. To that end, Tobit Multilevel Models and Heckman sample selection models are conducted.
+keywords: carpooling; Madrid; willingness to share; sample selection models; Heckman;
+  Tobit  
 vignette: |
   %\VignetteIndexEntry{Models carpool} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
 ---
@@ -35,22 +35,54 @@ library(tidyverse)
 data("dataSurveyA3")
 ```
 
-# 2. Carpooling Models
-We know how to developed a *Tobit Multilevel Model* in Stata.
-Are we able to developed a *Tobit Multilevel Model* in R?
-
-carpooling_descuento_2 esta creada para el Tobit PERO no esta ordenado.
-Sí esta ordenada la variable descuento_carpool
-
-
-**Willingness to share depending on the municipality**   
-Rivas dwellers are not surveyed because they do not have direct access to R3 Toll Expressway.
+**Willingness to share vehicle depending on the municipality**   
 ```{r}
 table(dataSurveyA3$municipio,dataSurveyA3$carpooling,useNA = c("ifany"))
 ```
 
+Rivas dwellers are not surveyed because they do not have direct access to R3 Toll Expressway.  
 Wrong data due to unrecognised trip destination or trip destination outside the boundaries of Madrid municipality are removed. Responses from Rivas are removed
-```{r}
+```{r, include=FALSE}
 dataSurveyA3_carpooling <- dataSurveyA3 %>% filter(municipio=="Arganda"&!is.na(Barrio_Destino_Name))
 ```
 There are `r nrow(dataSurveyA3_carpooling)` observations.
+
+**Willingness to share vehicle depending on the vehicle availability**
+```{r}
+table(dataSurveyA3_carpooling$vehiculo,dataSurveyA3_carpooling$carpooling,useNA = c("ifany"))
+```
+
+**Willingness to share vehicle depending on the driving license availability**
+```{r}
+table(dataSurveyA3_carpooling$carnet,dataSurveyA3_carpooling$carpooling,useNA = c("ifany"))
+```
+
+We removed the travellers that do not have vehicle availability as a driver.
+```{r, include=FALSE}
+dataSurveyA3_carpooling <- dataSurveyA3_carpooling %>% filter(vehiculo!="No"& vehiculo!="Yes_Passenger")
+```
+Now, there are `r nrow(dataSurveyA3_carpooling)` observations.
+
+# 2. Carpooling Models
+We know how to develope a *Tobit Multilevel Model* in Stata.  
+Are we able to develope a *Tobit Multilevel Model* in R?
+
+## Tobit models
+3 packages can be used to developed tobit models in R.  
+
+1. Function: censReg::censReg.  
+2. Function: VGAM::vglm estimates the censored regression model by using its own maximum likelihood routine.  
+3. Function: AER::tobit. The function tobit is a convenience interface to survreg (for survival regression, including censored regression) setting different defaults and providing a more convenient interface for specification of the censoring information. More information: https://rdrr.io/cran/AER/man/tobit.html  
+
+## Heckman sample selection model
+Compared to Tobit Models, Heckman sample selection models allow us using different explanatory variables in the selection equation and in the outcome equation. More information in: http://www.sampleselection.org/   
+
+Currently, the "sampleSelection" project includes four R packages:
+
+1. censReg: censored regression ("Tobit") models. It is the package used before.    
+2. intReg: interval regression models  
+3. mvProbit: multivariate probit models  
+4. sampleSelection: sample selection ("Heckman") models  
+```{r, include=FALSE}
+library(sampleSelection)
+```

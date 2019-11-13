@@ -1758,7 +1758,7 @@ summary {
 <h4 class="author">Fernando Romero</h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
-This vignette describes different econometric models for drawing conclusions about the travel survey data named dataSurveyA3 found in this package surveyA3Madrid. In particular, the willingness of drivers to share a vehicle with random strangers is studied.
+This vignette describes different econometric models for drawing conclusions about the travel survey data named dataSurveyA3 found in this package surveyA3Madrid. In particular, the willingness of drivers to share their vehicle with random strangers is studied. To that end, Tobit Multilevel Models and Heckman sample selection models are conducted.
 </div>
 
 </div>
@@ -1771,33 +1771,79 @@ This vignette describes different econometric models for drawing conclusions abo
 <h1>1. Download dataframe and required libraries</h1>
 <!-- rnb-text-end -->
 <!-- rnb-text-begin -->
-</div>
-<div id="carpooling-models" class="section level1">
-<h1>2. Carpooling Models</h1>
-<p>We know how to developed a <em>Tobit Multilevel Model</em> in Stata. Are we able to developed a <em>Tobit Multilevel Model</em> in R?</p>
-<p>carpooling_descuento_2 esta creada para el Tobit PERO no esta ordenado. Sí esta ordenada la variable descuento_carpool</p>
-<p><strong>Willingness to share depending on the municipality</strong><br />
-Rivas dwellers are not surveyed because they do not have direct access to R3 Toll Expressway.</p>
+<p><strong>Willingness to share vehicle depending on the municipality</strong></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGFibGUoZGF0YVN1cnZleUEzJG11bmljaXBpbyxkYXRhU3VydmV5QTMkY2FycG9vbGluZyx1c2VOQSA9IGMoXCJpZmFueVwiKSlcbmBgYCJ9 -->
 <pre class="r"><code>table(dataSurveyA3$municipio,dataSurveyA3$carpooling,useNA = c(&quot;ifany&quot;))</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgXG4gICAgICAgICAgIFNpICBObyA8TkE+XG4gIEFyZ2FuZGEgMTQxIDM0MyAgMTM3XG4gIFJpdmFzICAgICAwICAgMCAgNTY1XG4ifQ== -->
+<pre><code>         
+           Si  No &lt;NA&gt;
+  Arganda 141 343  137
+  Rivas     0   0  565</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Wrong data due to unrecognised trip destination or trip destination outside the boundaries of Madrid municipality are removed. Responses from Rivas are removed</p>
+<p>Rivas dwellers are not surveyed because they do not have direct access to R3 Toll Expressway.<br />
+Wrong data due to unrecognised trip destination or trip destination outside the boundaries of Madrid municipality are removed. Responses from Rivas are removed</p>
+<!-- rnb-text-end -->
+<!-- rnb-text-begin -->
+<p>There are 602 observations.</p>
+<p><strong>Willingness to share vehicle depending on the vehicle availability</strong></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YVN1cnZleUEzX2NhcnBvb2xpbmcgPC0gZGF0YVN1cnZleUEzICU+JSBmaWx0ZXIobXVuaWNpcGlvPT1cIkFyZ2FuZGFcIiYhaXMubmEoQmFycmlvX0Rlc3Rpbm9fTmFtZSkpXG5gYGAifQ== -->
-<pre class="r"><code>dataSurveyA3_carpooling &lt;- dataSurveyA3 %&gt;% filter(municipio==&quot;Arganda&quot;&amp;!is.na(Barrio_Destino_Name))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGFibGUoZGF0YVN1cnZleUEzX2NhcnBvb2xpbmckdmVoaWN1bG8sZGF0YVN1cnZleUEzX2NhcnBvb2xpbmckY2FycG9vbGluZyx1c2VOQSA9IGMoXCJpZmFueVwiKSlcbmBgYCJ9 -->
+<pre class="r"><code>table(dataSurveyA3_carpooling$vehiculo,dataSurveyA3_carpooling$carpooling,useNA = c(&quot;ifany&quot;))</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>There are 430 observations.</p>
+<p><strong>Willingness to share vehicle depending on the driving license availability</strong></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGFibGUoZGF0YVN1cnZleUEzX2NhcnBvb2xpbmckY2FybmV0LGRhdGFTdXJ2ZXlBM19jYXJwb29saW5nJGNhcnBvb2xpbmcsdXNlTkEgPSBjKFwiaWZhbnlcIikpXG5gYGAifQ== -->
+<pre class="r"><code>table(dataSurveyA3_carpooling$carnet,dataSurveyA3_carpooling$carpooling,useNA = c(&quot;ifany&quot;))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>We removed the travellers that do not have vehicle availability as a driver.</p>
+<!-- rnb-text-end -->
+<!-- rnb-text-begin -->
+<p>Now, there are 602 observations.</p>
+</div>
+<div id="carpooling-models" class="section level1">
+<h1>2. Carpooling Models</h1>
+<p>We know how to develope a <em>Tobit Multilevel Model</em> in Stata.<br />
+Are we able to develope a <em>Tobit Multilevel Model</em> in R?</p>
+<div id="tobit-models" class="section level2">
+<h2>Tobit models</h2>
+<p>3 packages can be used to developed tobit models in R.</p>
+<ol style="list-style-type: decimal">
+<li>Function: censReg::censReg.<br />
+</li>
+<li>Function: VGAM::vglm estimates the censored regression model by using its own maximum likelihood routine.<br />
+</li>
+<li>Function: AER::tobit. The function tobit is a convenience interface to survreg (for survival regression, including censored regression) setting different defaults and providing a more convenient interface for specification of the censoring information. More information: <a href="https://rdrr.io/cran/AER/man/tobit.html" class="uri">https://rdrr.io/cran/AER/man/tobit.html</a></li>
+</ol>
+</div>
+<div id="heckman-sample-selection-model" class="section level2">
+<h2>Heckman sample selection model</h2>
+<p>Compared to Tobit Models, Heckman sample selection models allow us using different explanatory variables in the selection equation and in the outcome equation. More information in: <a href="http://www.sampleselection.org/" class="uri">http://www.sampleselection.org/</a></p>
+<p>Currently, the “sampleSelection” project includes four R packages:</p>
+<ol style="list-style-type: decimal">
+<li>censReg: censored regression (“Tobit”) models. It is the package used before.<br />
+</li>
+<li>intReg: interval regression models<br />
+</li>
+<li>mvProbit: multivariate probit models<br />
+</li>
+<li>sampleSelection: sample selection (“Heckman”) models</li>
+</ol>
 <!-- rnb-text-end -->
 </div>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTW9kZWxzIGNhcnBvb2wiCmF1dGhvcjogIkZlcm5hbmRvIFJvbWVybyIKa2V5d29yZHM6IGNhcnBvb2xpbmc7IE1hZHJpZDsgd2lsbGluZ25lc3MgdG8gc2hhcmU7IHNhbXBsZSBzZWxlY3Rpb24gbW9kZWxzOyBIZWNrbWFuOwogIFRvYml0Cm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgZGZfcHJpbnQ6IHBhZ2VkCiAgcGRmX2RvY3VtZW50OiBkZWZhdWx0CiAgaHRtbF9ub3RlYm9vazogZGVmYXVsdAphYnN0cmFjdDogVGhpcyB2aWduZXR0ZSBkZXNjcmliZXMgZGlmZmVyZW50IGVjb25vbWV0cmljIG1vZGVscyBmb3IgZHJhd2luZyBjb25jbHVzaW9ucwogIGFib3V0IHRoZSB0cmF2ZWwgc3VydmV5IGRhdGEgbmFtZWQgZGF0YVN1cnZleUEzIGZvdW5kIGluIHRoaXMgcGFja2FnZSBzdXJ2ZXlBM01hZHJpZC4KICBJbiBwYXJ0aWN1bGFyLCB0aGUgd2lsbGluZ25lc3Mgb2YgZHJpdmVycyB0byBzaGFyZSBhIHZlaGljbGUgd2l0aCByYW5kb20gc3RyYW5nZXJzCiAgaXMgc3R1ZGllZC4KdmlnbmV0dGU6IHwKICAlXFZpZ25ldHRlSW5kZXhFbnRyeXtNb2RlbHMgY2FycG9vbH0gJVxWaWduZXR0ZUVuZ2luZXtrbml0cjo6cm1hcmtkb3dufSAlXFZpZ25ldHRlRW5jb2Rpbmd7VVRGLTh9Ci0tLQpgYGB7ciwgaW5jbHVkZSA9IEZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoCiAgY29sbGFwc2UgPSBUUlVFLAogIGNvbW1lbnQgPSAiIiwKICBlY2hvID0gRkFMU0UsIAogIHdhcm5pbmcgPSBGQUxTRSwgCiAgbWVzc2FnZSA9IEZBTFNFLCAKICBjYWNoZSA9IFRSVUUKKQpgYGAKCiMgMS4gRG93bmxvYWQgZGF0YWZyYW1lIGFuZCByZXF1aXJlZCBsaWJyYXJpZXMKCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQojIERlIGVzdGEgbWFuZXJhIHNlcGFybyBlbCBjw7NkaWdvIGRlIGxvcyBkYXRvcyB5IGVsIGNvZGlnbyBkZWwgbW9kZWxvIHkgc8OzbG8gdHJhYmFqbyBjb24gdW4gw7puaWNvIGFyY2hpdm8gZGUgdHJhdGFtaWVudG8gZGUgZGF0b3MuCmxpYnJhcnkoc3VydmV5QTNNYWRyaWQpCmxpYnJhcnkodGlkeXZlcnNlKQpkYXRhKCJkYXRhU3VydmV5QTMiKQpgYGAKCiMgMi4gQ2FycG9vbGluZyBNb2RlbHMKV2Uga25vdyBob3cgdG8gZGV2ZWxvcGVkIGEgKlRvYml0IE11bHRpbGV2ZWwgTW9kZWwqIGluIFN0YXRhLgpBcmUgd2UgYWJsZSB0byBkZXZlbG9wZWQgYSAqVG9iaXQgTXVsdGlsZXZlbCBNb2RlbCogaW4gUj8KCmNhcnBvb2xpbmdfZGVzY3VlbnRvXzIgZXN0YSBjcmVhZGEgcGFyYSBlbCBUb2JpdCBQRVJPIG5vIGVzdGEgb3JkZW5hZG8uClPDrSBlc3RhIG9yZGVuYWRhIGxhIHZhcmlhYmxlIGRlc2N1ZW50b19jYXJwb29sCgoKKipXaWxsaW5nbmVzcyB0byBzaGFyZSBkZXBlbmRpbmcgb24gdGhlIG11bmljaXBhbGl0eSoqICAgClJpdmFzIGR3ZWxsZXJzIGFyZSBub3Qgc3VydmV5ZWQgYmVjYXVzZSB0aGV5IGRvIG5vdCBoYXZlIGRpcmVjdCBhY2Nlc3MgdG8gUjMgVG9sbCBFeHByZXNzd2F5LgpgYGB7cn0KdGFibGUoZGF0YVN1cnZleUEzJG11bmljaXBpbyxkYXRhU3VydmV5QTMkY2FycG9vbGluZyx1c2VOQSA9IGMoImlmYW55IikpCmBgYAoKV3JvbmcgZGF0YSBkdWUgdG8gdW5yZWNvZ25pc2VkIHRyaXAgZGVzdGluYXRpb24gb3IgdHJpcCBkZXN0aW5hdGlvbiBvdXRzaWRlIHRoZSBib3VuZGFyaWVzIG9mIE1hZHJpZCBtdW5pY2lwYWxpdHkgYXJlIHJlbW92ZWQuIFJlc3BvbnNlcyBmcm9tIFJpdmFzIGFyZSByZW1vdmVkCmBgYHtyfQpkYXRhU3VydmV5QTNfY2FycG9vbGluZyA8LSBkYXRhU3VydmV5QTMgJT4lIGZpbHRlcihtdW5pY2lwaW89PSJBcmdhbmRhIiYhaXMubmEoQmFycmlvX0Rlc3Rpbm9fTmFtZSkpCmBgYApUaGVyZSBhcmUgYHIgbnJvdyhkYXRhU3VydmV5QTNfY2FycG9vbGluZylgIG9ic2VydmF0aW9ucy4K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTW9kZWxzIGNhcnBvb2wiCmF1dGhvcjogIkZlcm5hbmRvIFJvbWVybyIKb3V0cHV0OgogIHBkZl9kb2N1bWVudDogZGVmYXVsdAogIGh0bWxfZG9jdW1lbnQ6CiAgICBkZl9wcmludDogcGFnZWQKICBodG1sX25vdGVib29rOiBkZWZhdWx0CmFic3RyYWN0OiBUaGlzIHZpZ25ldHRlIGRlc2NyaWJlcyBkaWZmZXJlbnQgZWNvbm9tZXRyaWMgbW9kZWxzIGZvciBkcmF3aW5nIGNvbmNsdXNpb25zCiAgYWJvdXQgdGhlIHRyYXZlbCBzdXJ2ZXkgZGF0YSBuYW1lZCBkYXRhU3VydmV5QTMgZm91bmQgaW4gdGhpcyBwYWNrYWdlIHN1cnZleUEzTWFkcmlkLgogIEluIHBhcnRpY3VsYXIsIHRoZSB3aWxsaW5nbmVzcyBvZiBkcml2ZXJzIHRvIHNoYXJlIHRoZWlyIHZlaGljbGUgd2l0aCByYW5kb20gc3RyYW5nZXJzCiAgaXMgc3R1ZGllZC4gVG8gdGhhdCBlbmQsIFRvYml0IE11bHRpbGV2ZWwgTW9kZWxzIGFuZCBIZWNrbWFuIHNhbXBsZSBzZWxlY3Rpb24gbW9kZWxzIGFyZSBjb25kdWN0ZWQuCmtleXdvcmRzOiBjYXJwb29saW5nOyBNYWRyaWQ7IHdpbGxpbmduZXNzIHRvIHNoYXJlOyBzYW1wbGUgc2VsZWN0aW9uIG1vZGVsczsgSGVja21hbjsKICBUb2JpdCAgCnZpZ25ldHRlOiB8CiAgJVxWaWduZXR0ZUluZGV4RW50cnl7TW9kZWxzIGNhcnBvb2x9ICVcVmlnbmV0dGVFbmdpbmV7a25pdHI6OnJtYXJrZG93bn0gJVxWaWduZXR0ZUVuY29kaW5ne1VURi04fQotLS0KYGBge3IsIGluY2x1ZGUgPSBGQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KAogIGNvbGxhcHNlID0gVFJVRSwKICBjb21tZW50ID0gIiIsCiAgZWNobyA9IEZBTFNFLCAKICB3YXJuaW5nID0gRkFMU0UsIAogIG1lc3NhZ2UgPSBGQUxTRSwgCiAgY2FjaGUgPSBUUlVFCikKYGBgCgojIDEuIERvd25sb2FkIGRhdGFmcmFtZSBhbmQgcmVxdWlyZWQgbGlicmFyaWVzCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0KIyBEZSBlc3RhIG1hbmVyYSBzZXBhcm8gZWwgY8OzZGlnbyBkZSBsb3MgZGF0b3MgeSBlbCBjb2RpZ28gZGVsIG1vZGVsbyB5IHPDs2xvIHRyYWJham8gY29uIHVuIMO6bmljbyBhcmNoaXZvIGRlIHRyYXRhbWllbnRvIGRlIGRhdG9zLgpsaWJyYXJ5KHN1cnZleUEzTWFkcmlkKQpsaWJyYXJ5KHRpZHl2ZXJzZSkKZGF0YSgiZGF0YVN1cnZleUEzIikKYGBgCgoqKldpbGxpbmduZXNzIHRvIHNoYXJlIHZlaGljbGUgZGVwZW5kaW5nIG9uIHRoZSBtdW5pY2lwYWxpdHkqKiAgIApgYGB7cn0KdGFibGUoZGF0YVN1cnZleUEzJG11bmljaXBpbyxkYXRhU3VydmV5QTMkY2FycG9vbGluZyx1c2VOQSA9IGMoImlmYW55IikpCmBgYAoKUml2YXMgZHdlbGxlcnMgYXJlIG5vdCBzdXJ2ZXllZCBiZWNhdXNlIHRoZXkgZG8gbm90IGhhdmUgZGlyZWN0IGFjY2VzcyB0byBSMyBUb2xsIEV4cHJlc3N3YXkuICAKV3JvbmcgZGF0YSBkdWUgdG8gdW5yZWNvZ25pc2VkIHRyaXAgZGVzdGluYXRpb24gb3IgdHJpcCBkZXN0aW5hdGlvbiBvdXRzaWRlIHRoZSBib3VuZGFyaWVzIG9mIE1hZHJpZCBtdW5pY2lwYWxpdHkgYXJlIHJlbW92ZWQuIFJlc3BvbnNlcyBmcm9tIFJpdmFzIGFyZSByZW1vdmVkCmBgYHtyLCBpbmNsdWRlPUZBTFNFfQpkYXRhU3VydmV5QTNfY2FycG9vbGluZyA8LSBkYXRhU3VydmV5QTMgJT4lIGZpbHRlcihtdW5pY2lwaW89PSJBcmdhbmRhIiYhaXMubmEoQmFycmlvX0Rlc3Rpbm9fTmFtZSkpCmBgYApUaGVyZSBhcmUgYHIgbnJvdyhkYXRhU3VydmV5QTNfY2FycG9vbGluZylgIG9ic2VydmF0aW9ucy4KCioqV2lsbGluZ25lc3MgdG8gc2hhcmUgdmVoaWNsZSBkZXBlbmRpbmcgb24gdGhlIHZlaGljbGUgYXZhaWxhYmlsaXR5KioKYGBge3J9CnRhYmxlKGRhdGFTdXJ2ZXlBM19jYXJwb29saW5nJHZlaGljdWxvLGRhdGFTdXJ2ZXlBM19jYXJwb29saW5nJGNhcnBvb2xpbmcsdXNlTkEgPSBjKCJpZmFueSIpKQpgYGAKCioqV2lsbGluZ25lc3MgdG8gc2hhcmUgdmVoaWNsZSBkZXBlbmRpbmcgb24gdGhlIGRyaXZpbmcgbGljZW5zZSBhdmFpbGFiaWxpdHkqKgpgYGB7cn0KdGFibGUoZGF0YVN1cnZleUEzX2NhcnBvb2xpbmckY2FybmV0LGRhdGFTdXJ2ZXlBM19jYXJwb29saW5nJGNhcnBvb2xpbmcsdXNlTkEgPSBjKCJpZmFueSIpKQpgYGAKCldlIHJlbW92ZWQgdGhlIHRyYXZlbGxlcnMgdGhhdCBkbyBub3QgaGF2ZSB2ZWhpY2xlIGF2YWlsYWJpbGl0eSBhcyBhIGRyaXZlci4KYGBge3IsIGluY2x1ZGU9RkFMU0V9CmRhdGFTdXJ2ZXlBM19jYXJwb29saW5nIDwtIGRhdGFTdXJ2ZXlBM19jYXJwb29saW5nICU+JSBmaWx0ZXIodmVoaWN1bG8hPSJObyImIHZlaGljdWxvIT0iWWVzX1Bhc3NlbmdlciIpCmBgYApOb3csIHRoZXJlIGFyZSBgciBucm93KGRhdGFTdXJ2ZXlBM19jYXJwb29saW5nKWAgb2JzZXJ2YXRpb25zLgoKIyAyLiBDYXJwb29saW5nIE1vZGVscwpXZSBrbm93IGhvdyB0byBkZXZlbG9wZSBhICpUb2JpdCBNdWx0aWxldmVsIE1vZGVsKiBpbiBTdGF0YS4gIApBcmUgd2UgYWJsZSB0byBkZXZlbG9wZSBhICpUb2JpdCBNdWx0aWxldmVsIE1vZGVsKiBpbiBSPwoKIyMgVG9iaXQgbW9kZWxzCjMgcGFja2FnZXMgY2FuIGJlIHVzZWQgdG8gZGV2ZWxvcGVkIHRvYml0IG1vZGVscyBpbiBSLiAgCgoxLiBGdW5jdGlvbjogY2Vuc1JlZzo6Y2Vuc1JlZy4gIAoyLiBGdW5jdGlvbjogVkdBTTo6dmdsbSBlc3RpbWF0ZXMgdGhlIGNlbnNvcmVkIHJlZ3Jlc3Npb24gbW9kZWwgYnkgdXNpbmcgaXRzIG93biBtYXhpbXVtIGxpa2VsaWhvb2Qgcm91dGluZS4gIAozLiBGdW5jdGlvbjogQUVSOjp0b2JpdC4gVGhlIGZ1bmN0aW9uIHRvYml0IGlzIGEgY29udmVuaWVuY2UgaW50ZXJmYWNlIHRvIHN1cnZyZWcgKGZvciBzdXJ2aXZhbCByZWdyZXNzaW9uLCBpbmNsdWRpbmcgY2Vuc29yZWQgcmVncmVzc2lvbikgc2V0dGluZyBkaWZmZXJlbnQgZGVmYXVsdHMgYW5kIHByb3ZpZGluZyBhIG1vcmUgY29udmVuaWVudCBpbnRlcmZhY2UgZm9yIHNwZWNpZmljYXRpb24gb2YgdGhlIGNlbnNvcmluZyBpbmZvcm1hdGlvbi4gTW9yZSBpbmZvcm1hdGlvbjogaHR0cHM6Ly9yZHJyLmlvL2NyYW4vQUVSL21hbi90b2JpdC5odG1sICAKCiMjIEhlY2ttYW4gc2FtcGxlIHNlbGVjdGlvbiBtb2RlbApDb21wYXJlZCB0byBUb2JpdCBNb2RlbHMsIEhlY2ttYW4gc2FtcGxlIHNlbGVjdGlvbiBtb2RlbHMgYWxsb3cgdXMgdXNpbmcgZGlmZmVyZW50IGV4cGxhbmF0b3J5IHZhcmlhYmxlcyBpbiB0aGUgc2VsZWN0aW9uIGVxdWF0aW9uIGFuZCBpbiB0aGUgb3V0Y29tZSBlcXVhdGlvbi4gTW9yZSBpbmZvcm1hdGlvbiBpbjogaHR0cDovL3d3dy5zYW1wbGVzZWxlY3Rpb24ub3JnLyAgIAoKQ3VycmVudGx5LCB0aGUgInNhbXBsZVNlbGVjdGlvbiIgcHJvamVjdCBpbmNsdWRlcyBmb3VyIFIgcGFja2FnZXM6CgoxLiBjZW5zUmVnOiBjZW5zb3JlZCByZWdyZXNzaW9uICgiVG9iaXQiKSBtb2RlbHMuIEl0IGlzIHRoZSBwYWNrYWdlIHVzZWQgYmVmb3JlLiAgICAKMi4gaW50UmVnOiBpbnRlcnZhbCByZWdyZXNzaW9uIG1vZGVscyAgCjMuIG12UHJvYml0OiBtdWx0aXZhcmlhdGUgcHJvYml0IG1vZGVscyAgCjQuIHNhbXBsZVNlbGVjdGlvbjogc2FtcGxlIHNlbGVjdGlvbiAoIkhlY2ttYW4iKSBtb2RlbHMgIApgYGB7ciwgaW5jbHVkZT1GQUxTRX0KbGlicmFyeShzYW1wbGVTZWxlY3Rpb24pCmBgYAo=</div>
 
 
 

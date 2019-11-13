@@ -15,18 +15,39 @@
 * checking for hidden files and directories ... OK
 * checking for portable file names ... NOTE
 Found the following non-portable file paths:
-  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-2_9c30b473bf04a4c6cf8d2d782b53204c.RData
-  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-2_9c30b473bf04a4c6cf8d2d782b53204c.rdb
-  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-2_9c30b473bf04a4c6cf8d2d782b53204c.rdx
-  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-3_d1218334ba334df0304e80f8fa25603f.RData
-  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-3_d1218334ba334df0304e80f8fa25603f.rdb
-  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-3_d1218334ba334df0304e80f8fa25603f.rdx
-  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-2_fa6d0c67cc64194afbb68f94d290a461.RData
-  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-2_fa6d0c67cc64194afbb68f94d290a461.rdb
-  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-2_fa6d0c67cc64194afbb68f94d290a461.rdx
-  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-3_c9f141753bc6b9d0af4611a4479cb60b.RData
-  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-3_c9f141753bc6b9d0af4611a4479cb60b.rdb
-  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-3_c9f141753bc6b9d0af4611a4479cb60b.rdx
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-2_f6c9466741f3de010ad2b56a225b3d3a.RData
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-2_f6c9466741f3de010ad2b56a225b3d3a.rdb
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-2_f6c9466741f3de010ad2b56a225b3d3a.rdx
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-3_ad88939c49e469efd33dc8bad35a6a1d.RData
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-3_ad88939c49e469efd33dc8bad35a6a1d.rdb
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-3_ad88939c49e469efd33dc8bad35a6a1d.rdx
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-4_42eaed7ff53945e0d78ef338aa5e1024.RData
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-4_42eaed7ff53945e0d78ef338aa5e1024.rdb
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-4_42eaed7ff53945e0d78ef338aa5e1024.rdx
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-5_23cf9b48e0d2e33472209b9a532e4ee9.RData
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-5_23cf9b48e0d2e33472209b9a532e4ee9.rdb
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-5_23cf9b48e0d2e33472209b9a532e4ee9.rdx
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-6_e0ff1ab15e88103c5b14972e6d280609.RData
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-6_e0ff1ab15e88103c5b14972e6d280609.rdb
+  surveyA3Madrid/vignettes/models_carpool_cache/html/unnamed-chunk-6_e0ff1ab15e88103c5b14972e6d280609.rdx
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-2_105146a41bed98db3acc6ac32c04e2a3.RData
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-2_105146a41bed98db3acc6ac32c04e2a3.rdb
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-2_105146a41bed98db3acc6ac32c04e2a3.rdx
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-3_4cf17e769901ec83f725f6be831a63b6.RData
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-3_4cf17e769901ec83f725f6be831a63b6.rdb
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-3_4cf17e769901ec83f725f6be831a63b6.rdx
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-4_470f4bc6e1de16938eb05b341ad4c906.RData
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-4_470f4bc6e1de16938eb05b341ad4c906.rdb
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-4_470f4bc6e1de16938eb05b341ad4c906.rdx
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-5_e4580ed8dd0a3f99a910b2424d34233a.RData
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-5_e4580ed8dd0a3f99a910b2424d34233a.rdb
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-5_e4580ed8dd0a3f99a910b2424d34233a.rdx
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-6_15d50132db1aa56e6711ed8065be280a.RData
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-6_15d50132db1aa56e6711ed8065be280a.rdb
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-6_15d50132db1aa56e6711ed8065be280a.rdx
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-7_5167c0ff2b9b1582d5b739ef7e943083.RData
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-7_5167c0ff2b9b1582d5b739ef7e943083.rdb
+  surveyA3Madrid/vignettes/models_carpool_cache/latex/unnamed-chunk-7_5167c0ff2b9b1582d5b739ef7e943083.rdx
 
 Tarballs are only required to store paths of up to 100 bytes and cannot
 store those of more than 256 bytes, with restrictions including to 100
@@ -74,25 +95,46 @@ Undefined global functions or variables:
 Files in the 'vignettes' directory but no files in 'inst/doc':
   ‘models_carpool.Rmd’, ‘models_carpool.nb.html’,
     ‘models_carpool_cache/html/__packages’,
-    ‘models_carpool_cache/html/setup_fcb0e37c29e9fae85e678ba58f5075eb.RData’,
-    ‘models_carpool_cache/html/setup_fcb0e37c29e9fae85e678ba58f5075eb.rdb’,
-    ‘models_carpool_cache/html/setup_fcb0e37c29e9fae85e678ba58f5075eb.rdx’,
-    ‘models_carpool_cache/html/unnamed-chunk-2_9c30b473bf04a4c6cf8d2d782b53204c.RData’,
-    ‘models_carpool_cache/html/unnamed-chunk-2_9c30b473bf04a4c6cf8d2d782b53204c.rdb’,
-    ‘models_carpool_cache/html/unnamed-chunk-2_9c30b473bf04a4c6cf8d2d782b53204c.rdx’,
-    ‘models_carpool_cache/html/unnamed-chunk-3_d1218334ba334df0304e80f8fa25603f.RData’,
-    ‘models_carpool_cache/html/unnamed-chunk-3_d1218334ba334df0304e80f8fa25603f.rdb’,
-    ‘models_carpool_cache/html/unnamed-chunk-3_d1218334ba334df0304e80f8fa25603f.rdx’,
+    ‘models_carpool_cache/html/setup_fd31cad6af0ae24fcdd6fadec3838f1e.RData’,
+    ‘models_carpool_cache/html/setup_fd31cad6af0ae24fcdd6fadec3838f1e.rdb’,
+    ‘models_carpool_cache/html/setup_fd31cad6af0ae24fcdd6fadec3838f1e.rdx’,
+    ‘models_carpool_cache/html/unnamed-chunk-2_f6c9466741f3de010ad2b56a225b3d3a.RData’,
+    ‘models_carpool_cache/html/unnamed-chunk-2_f6c9466741f3de010ad2b56a225b3d3a.rdb’,
+    ‘models_carpool_cache/html/unnamed-chunk-2_f6c9466741f3de010ad2b56a225b3d3a.rdx’,
+    ‘models_carpool_cache/html/unnamed-chunk-3_ad88939c49e469efd33dc8bad35a6a1d.RData’,
+    ‘models_carpool_cache/html/unnamed-chunk-3_ad88939c49e469efd33dc8bad35a6a1d.rdb’,
+    ‘models_carpool_cache/html/unnamed-chunk-3_ad88939c49e469efd33dc8bad35a6a1d.rdx’,
+    ‘models_carpool_cache/html/unnamed-chunk-4_42eaed7ff53945e0d78ef338aa5e1024.RData’,
+    ‘models_carpool_cache/html/unnamed-chunk-4_42eaed7ff53945e0d78ef338aa5e1024.rdb’,
+    ‘models_carpool_cache/html/unnamed-chunk-4_42eaed7ff53945e0d78ef338aa5e1024.rdx’,
+    ‘models_carpool_cache/html/unnamed-chunk-5_23cf9b48e0d2e33472209b9a532e4ee9.RData’,
+    ‘models_carpool_cache/html/unnamed-chunk-5_23cf9b48e0d2e33472209b9a532e4ee9.rdb’,
+    ‘models_carpool_cache/html/unnamed-chunk-5_23cf9b48e0d2e33472209b9a532e4ee9.rdx’,
+    ‘models_carpool_cache/html/unnamed-chunk-6_e0ff1ab15e88103c5b14972e6d280609.RData’,
+    ‘models_carpool_cache/html/unnamed-chunk-6_e0ff1ab15e88103c5b14972e6d280609.rdb’,
+    ‘models_carpool_cache/html/unnamed-chunk-6_e0ff1ab15e88103c5b14972e6d280609.rdx’,
     ‘models_carpool_cache/latex/__packages’,
-    ‘models_carpool_cache/latex/setup_3dd452eed101256f2d7b64e87c154db0.RData’,
-    ‘models_carpool_cache/latex/setup_3dd452eed101256f2d7b64e87c154db0.rdb’,
-    ‘models_carpool_cache/latex/setup_3dd452eed101256f2d7b64e87c154db0.rdx’,
-    ‘models_carpool_cache/latex/unnamed-chunk-2_fa6d0c67cc64194afbb68f94d290a461.RData’,
-    ‘models_carpool_cache/latex/unnamed-chunk-2_fa6d0c67cc64194afbb68f94d290a461.rdb’,
-    ‘models_carpool_cache/latex/unnamed-chunk-2_fa6d0c67cc64194afbb68f94d290a461.rdx’,
-    ‘models_carpool_cache/latex/unnamed-chunk-3_c9f141753bc6b9d0af4611a4479cb60b.RData’,
-    ‘models_carpool_cache/latex/unnamed-chunk-3_c9f141753bc6b9d0af4611a4479cb60b.rdb’,
-    ‘models_carpool_cache/latex/unnamed-chunk-3_c9f141753bc6b9d0af4611a4479cb60b.rdx’
+    ‘models_carpool_cache/latex/setup_1d270832da9efbb4a1ba7d314b091ee9.RData’,
+    ‘models_carpool_cache/latex/setup_1d270832da9efbb4a1ba7d314b091ee9.rdb’,
+    ‘models_carpool_cache/latex/setup_1d270832da9efbb4a1ba7d314b091ee9.rdx’,
+    ‘models_carpool_cache/latex/unnamed-chunk-2_105146a41bed98db3acc6ac32c04e2a3.RData’,
+    ‘models_carpool_cache/latex/unnamed-chunk-2_105146a41bed98db3acc6ac32c04e2a3.rdb’,
+    ‘models_carpool_cache/latex/unnamed-chunk-2_105146a41bed98db3acc6ac32c04e2a3.rdx’,
+    ‘models_carpool_cache/latex/unnamed-chunk-3_4cf17e769901ec83f725f6be831a63b6.RData’,
+    ‘models_carpool_cache/latex/unnamed-chunk-3_4cf17e769901ec83f725f6be831a63b6.rdb’,
+    ‘models_carpool_cache/latex/unnamed-chunk-3_4cf17e769901ec83f725f6be831a63b6.rdx’,
+    ‘models_carpool_cache/latex/unnamed-chunk-4_470f4bc6e1de16938eb05b341ad4c906.RData’,
+    ‘models_carpool_cache/latex/unnamed-chunk-4_470f4bc6e1de16938eb05b341ad4c906.rdb’,
+    ‘models_carpool_cache/latex/unnamed-chunk-4_470f4bc6e1de16938eb05b341ad4c906.rdx’,
+    ‘models_carpool_cache/latex/unnamed-chunk-5_e4580ed8dd0a3f99a910b2424d34233a.RData’,
+    ‘models_carpool_cache/latex/unnamed-chunk-5_e4580ed8dd0a3f99a910b2424d34233a.rdb’,
+    ‘models_carpool_cache/latex/unnamed-chunk-5_e4580ed8dd0a3f99a910b2424d34233a.rdx’,
+    ‘models_carpool_cache/latex/unnamed-chunk-6_15d50132db1aa56e6711ed8065be280a.RData’,
+    ‘models_carpool_cache/latex/unnamed-chunk-6_15d50132db1aa56e6711ed8065be280a.rdb’,
+    ‘models_carpool_cache/latex/unnamed-chunk-6_15d50132db1aa56e6711ed8065be280a.rdx’,
+    ‘models_carpool_cache/latex/unnamed-chunk-7_5167c0ff2b9b1582d5b739ef7e943083.RData’,
+    ‘models_carpool_cache/latex/unnamed-chunk-7_5167c0ff2b9b1582d5b739ef7e943083.rdb’,
+    ‘models_carpool_cache/latex/unnamed-chunk-7_5167c0ff2b9b1582d5b739ef7e943083.rdx’
 Files named as vignettes but with no recognized vignette engine:
    ‘vignettes/models_carpool.Rmd’
 (Is a VignetteBuilder field missing?)
