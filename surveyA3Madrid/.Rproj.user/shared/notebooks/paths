@@ -1,3 +1,5 @@
+/Users/fernandoromerogarcia/Documents/GitHub/RPackages/.gitignore="A7FF4463"
+/Users/fernandoromerogarcia/Documents/GitHub/RPackages/surveyA3Madrid/.gitignore="D73AB49"
 /Users/fernandoromerogarcia/Documents/GitHub/RPackages/surveyA3Madrid/DESCRIPTION="C754D93B"
 /Users/fernandoromerogarcia/Documents/GitHub/RPackages/surveyA3Madrid/NAMESPACE="7167960F"
 /Users/fernandoromerogarcia/Documents/GitHub/RPackages/surveyA3Madrid/R/contingencyTables.R="BB4E3CCE"
@@ -5,5 +7,6 @@
 /Users/fernandoromerogarcia/Documents/GitHub/RPackages/surveyA3Madrid/man/contingencyTables.Rd="C598E407"
 /Users/fernandoromerogarcia/Documents/GitHub/RPackages/surveyA3Madrid/raw/Data_Management.Rmd="AA5CC6AD"
 /Users/fernandoromerogarcia/Documents/GitHub/RPackages/surveyA3Madrid/raw/models_carpool.Rmd="57DCE4C5"
+/Users/fernandoromerogarcia/Documents/GitHub/RPackages/surveyA3Madrid/vignettes/.gitignore="DBF340E0"
 /Users/fernandoromerogarcia/Documents/GitHub/RPackages/surveyA3Madrid/vignettes/carpooling.Rmd="F5402B84"
 /Users/fernandoromerogarcia/OneDrive - UNED/Papers/Paper 3/Models_R/Models_Carpool.Rmd="BF4D8972"

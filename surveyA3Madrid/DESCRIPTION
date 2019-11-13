@@ -13,5 +13,6 @@ RoxygenNote: 6.1.1
 Suggests: 
     knitr,
     rmarkdown,
-    tidyverse
+    tidyverse,
+    sampleSelection
 VignetteBuilder: knitr
