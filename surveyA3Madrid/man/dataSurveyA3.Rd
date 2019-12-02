@@ -24,6 +24,7 @@
   \item{P12}{Departure time of the last trip to Madrid municipality. Hour:minute}
   \item{hora_franja}{Departure time of the last trip to Madrid municipality. 6 categories: peak morning, non peak morning, afternoon, peak evening, non peak evening, night. Created from P12}
   \item{tiempo_viaje}{Stated travel time of the last trip to Madrid municipality in minutes}
+  \item{tiempo2}{Squared tiempo_viaje. Squared Stated travel time of the last trip to Madrid municipality in minutes}
   \item{motivo_viaje}{Purpose of the last trip to Madrid municipality. 8 categories}
   \item{motivo_viaje_2}{Purpose of the last trip to Madrid municipality. 2 categories: Work_Studies, Others. Created from motivo_viaje}
   \item{modo}{Mode of transport of the last trip to Madrid municipality. 7 categories}
@@ -55,10 +56,11 @@
   \item{elegiria_metro_rivas}{Only Rivas dwellers. It is not asked to people who made their last trip by metro. Willingness to use Metro if the transfer in Puerta Arganda station was removed for a journey similar to the stated one}
   \item{elegiria_metro}{It is not asked to people who made their last trip by metro. Willingness to use Metro if the transfer in Puerta Arganda station was removed for a journey similar to the stated one. Created combining elegiria_metro_arganda and elegiria_metro_rivas}
   \item{zona_metro}{For each census section, nearest metro stations. Calculated with the centroid of the census section and API Google Maps. 5 categories}
-  \item{Distancia_min_metro}{For each census section, distance to the nearest metro station in meters. Calculated with the centroid of the census section and API Google Maps. 5 categories}
+  \item{Distancia_min_metro}{For each census section, distance to the nearest metro station in meters. Calculated with the centroid of the census section and API Google Maps.}
   \item{Parada_bus}{For each census section, nearest suggested Express Bus Stop. Calculated by the centroid of the census section and API Google Maps. 6 categories}
   \item{Distrito_Destino_Name}{The official name of the destination district. Created from  the last trip destination stated by the respondent in ArcGIS}
   \item{Barrio_Destino_Name}{The official name of the destination neighbourhood. Created from  the last trip destination stated by the respondent in ArcGIS}
+  \item{dist_peaje}{Only for Arganda dwellers. For each census section, distance from the centroid to the R3 toll gate in meters. Created using API Google Maps.}
   \item{ahorrotiempo1}{Travel time saving using R3 toll highway compared to the stated travel time. Created using API Google Maps}
   \item{cluster_A_1}{Cluster of the 26 census section of Arganda considering average household income. 2 categories}
   \item{cluster_A_2}{Cluster of the 26 census section of Arganda considering average household income. 3 categories}
@@ -68,10 +70,6 @@
   \item{cluster_A_8}{Cluster of the 26 census section of Arganda considering average age, percentage of women, average household income, percentage of votes to right-wing parties. 3 categories}
   \item{cluster_A_10}{Cluster of the 26 census section of Arganda considering average age, average household income, percentage of votes to right-wing parties. 2 categories}
   \item{cluster_A_11}{Cluster of the 26 census section of Arganda considering average age, average household income, percentage of votes to right-wing parties. 3 categories}
-  \item{Arg_Cluster_Income}{Average household income of each of the 26 census section of Arganda. In €}
-  \item{Arg_Cluster_Women}{Average age of each of the 26 census section of Arganda}
-  \item{Arg_Cluster_Age}{Percentage of women of each of the 26 census section of Arganda}
-  \item{Arg_Cluster_Right_Wing}{Percentage of votes to right-wing parties of each of the 26 census section of Arganda}
   \item{cluster_RA_1}{Cluster of all census sections considering average household income. 2 categories}
   \item{cluster_RA_2}{Cluster of all census sections considering average household income. 3 categories}
   \item{cluster_RA_3}{Cluster of all census sections considering average household income. 4 categories}
