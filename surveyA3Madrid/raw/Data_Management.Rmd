@@ -164,36 +164,36 @@ Datos_full$Barrio_Destino_Name<-factor(Datos_full$Barrio_Destino_Name)
 Edad es continua y no se toca.
 
 ```{r}
-Datos_full$edad_cat<-factor(Datos_full$edad_cat,levels = c(1:6),labels=c("15 o menos","De 16 a 26","De 27 a 34","De 35 a 49","De 50 a 64","Mayor de 64"))
-Datos_full$genero<-factor(Datos_full$genero,levels = c(1,2),labels=c("Hombre","Mujer"))
-Datos_full$ingreso<-factor(Datos_full$ingreso,levels = c(1,2,3,4,5,99),labels=c("Menos_900","900_1600","1600_2500","2500_3000","Mas_3000","NS_NC"))
-Datos_full$estudios<-factor(Datos_full$estudios,levels = c(1:4),labels=c("Sin_estudios","Estudios_primarios","Estudios_Secundarios","Estudios_Universitarios"))
-Datos_full$sit_laboral<- factor(Datos_full$sit_laboral,levels=c(1:9),labels=c("Employed","Student","Employed_Student","Unpaid_household","Retire","Pensiones","Unemployed_Looking","Unemployed_Not_Looking","Other"))
-Datos_full$vehiculo <- factor(Datos_full$vehiculo,levels=c(1:5),labels=c("No","Yes_Driver","Yes_ST_Driver","Yes_No_Driver","Yes_Passenger"))
-Datos_full$carnet <- factor(Datos_full$carnet, levels=c(1:5),labels=c("NO","DeMoto","DeCoche","DeMotoYCoche","NoProcede"))
-Datos_full$abono <-factor(Datos_full$abono,levels = c(2,1),labels=c("No","Yes"))
+Datos_full$edad_cat<-factor(Datos_full$edad_cat,levels = c(1:6),labels=c("Under 16","From 16 to 26","From 27 to 34","From 35 to 49","From 50 to 64","Above 64"))
+Datos_full$genero<-factor(Datos_full$genero,levels = c(1,2),labels=c("Male","Female"))
+Datos_full$ingreso<-factor(Datos_full$ingreso,levels = c(1,2,3,4,5,99),labels=c("Under 900 €","From 900 € to 1600 €","From 1600 € to 2500 €", "From 2500 € to 3000 €", "Above 3000 €", "Not responding"))
+Datos_full$estudios<-factor(Datos_full$estudios,levels = c(1:4),labels=c("No studies","Primary studies","Secondary studies","University studies"))
+Datos_full$sit_laboral<- factor(Datos_full$sit_laboral,levels=c(1:9),labels=c("Employed","Student","Employed Student","Unpaid domestic labour","Retired","Pensioner","Unemployed Looking","Unemployed Not Looking","Other"))
+Datos_full$vehiculo <- factor(Datos_full$vehiculo,levels=c(1:5),labels=c("No","Yes Driver","Yes ST Driver","Yes No Driver","Yes Passenger"))
+Datos_full$carnet <- factor(Datos_full$carnet, levels=c(1:5),labels=c("No driving licence","Moto driving licence","Car driving licence","Moto and car driving licence","Not applicable"))
+Datos_full$abono <-factor(Datos_full$abono,levels = c(2,1),labels=c("No transit pass","Yes transit pass"))
 
 ```
 
 ## 3.Variables independientes relacionadas con el viaje
 ```{r}
-Datos_full$frec_madrid<- factor(Datos_full$frec_madrid,levels=c(1:3),labels=c("More_3days","1-3days","1_2month"))
-Datos_full$frec_viaje<- factor(Datos_full$frec_viaje,levels=c(1:4),labels=c("4 o mas dias a la semana","1-3 dias a la semana","1-2 veces al mes","Menos de una vez al mes"))
+Datos_full$frec_madrid<- factor(Datos_full$frec_madrid,levels=c(1:3),labels=c("More 3days","1 3days","Once or twice a month"))
+Datos_full$frec_viaje<- factor(Datos_full$frec_viaje,levels=c(1:4),labels=c("4 o mas dias a la semana","1 3 dias a la semana","1 2 veces al mes","Menos de una vez al mes"))
 
-Datos_full$modo <- factor(Datos_full$modo, levels= c(1:7),labels=c("Coche","Motocicleta","Bus","Metro","Taxi","VTC","Bus_Discrecional"))
-Datos_full$modo_bis <- factor(Datos_full$modo_bis, levels= c(1:8),labels=c("Coche","Motocicleta","Bus","Metro","Taxi","VTC","Bus_Discrecional","R3"))
-Datos_full$tipo_dia <- factor(Datos_full$tipo_dia, levels=c(1:7),labels = c("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"))
+Datos_full$modo <- factor(Datos_full$modo, levels= c(1:7),labels=c("Car 1","Moto 1","Bus 1","Metro 1","Taxi 1","VTC 1","Bus Discrecional 1"))
+Datos_full$modo_bis <- factor(Datos_full$modo_bis, levels= c(1:8),labels=c("Car","Moto","Bus","Metro","Taxi","VTC","Bus Discrecional","R3"))
+Datos_full$tipo_dia <- factor(Datos_full$tipo_dia, levels=c(1:7),labels = c("Monday 1","Tuesday 1","Wednesday 1","Thursday 1","Friday 1","Saturday 1","Sunday 1"))
 Datos_full$tipo_dia2 <- factor(Datos_full$tipo_dia2, levels=c("1","1","1","1","1","2","3"),labels = c("Weekday","Weekday","Weekday","Weekday","Weekday","Saturday","Sunday"))
-Datos_full$motivo_viaje <- factor(Datos_full$motivo_viaje, levels=c(1:8),labels = c("Work_Studies","Working_Affairs","Personal_Affairs","Leisure","Shopping","Doctor","Visiting_Friends","Other"))
-Datos_full$motivo_viaje_2<-factor(Datos_full$motivo_viaje_2, levels=c("1","2"),labels=c("Work_Studies","Non_Work_Studies"))
+Datos_full$motivo_viaje <- factor(Datos_full$motivo_viaje, levels=c(1:8),labels = c("Work Studies","Working Affairs","Personal Affairs","Leisure","Shopping","Doctor","Visiting Friends","Other"))
+Datos_full$motivo_viaje_2<-factor(Datos_full$motivo_viaje_2, levels=c("1","2"),labels=c("Commuting","Non commuting"))
 
 Datos_full$ruta<-factor(Datos_full$ruta,levels=c(1:2),labels=c("A3","R3"))
 
-Datos_full$P15_B<-factor(Datos_full$P15_B,levels=c(1:2),labels=c("Conductor","Acompanante"))
-Datos_full$hora_franja <- factor(Datos_full$hora_franja, levels=c("1","2","3","4","5","6"),labels = c("peak morning","non peak morning","afternoon","peak evening","non peak evening","night"))
+Datos_full$P15_B<-factor(Datos_full$P15_B,levels=c(1:2),labels=c("Driver","Rider"))
+Datos_full$hora_franja <- factor(Datos_full$hora_franja, levels=c("1","2","3","4","5","6"),labels = c("Peak morning","Non peak morning","Afternoon","Peak evening","Non peak evening","Night"))
 
-Datos_full$solo <- factor(Datos_full$solo, levels = c(1:3),labels=c("Solo","Acompanado","Acompanado_Menores"))
-Datos_full$combinar<- factor(Datos_full$combinar, levels = c(1:2),labels=c("Si","No"))
+Datos_full$solo <- factor(Datos_full$solo, levels = c(1:3),labels=c("Alone","Accompanied","Accompanied with minors"))
+Datos_full$combinar<- factor(Datos_full$combinar, levels = c(1:2),labels=c("Yes","No"))
 Datos_full$aspectos<- factor(Datos_full$aspectos, levels = c(1:4),labels=c("Tiempo de viaje por congestion (nivel de trafico)","Incidencias en el medio elegido: obras, accidentes, huelgas en transporte publico","Meteorologia","Protocolos de contaminacion en Madrid capital"))
 
 ```
